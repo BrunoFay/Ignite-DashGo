@@ -13,13 +13,13 @@ export default function Sidebar() {
           <Stack align="stretch" mt="8" spacing="4">
             <Link display="flex" alignItems="center">
               <Icon as={DiamondsFour} fontSize={20} />
-              <Text ml="4" fontWeight="medium">
+              <Text ml="4" fontWeight="bold">
                 Dashboard
               </Text>
             </Link>
             <Link display="flex" alignItems="center">
               <Icon as={UserList} fontSize={20} />
-              <Text ml="4" fontWeight="medium">
+              <Text ml="4" fontWeight="bold">
                 Users
               </Text>
             </Link>
@@ -33,13 +33,13 @@ export default function Sidebar() {
           <Stack align="stretch" mt="8" spacing="4">
             <Link display="flex" alignItems="center">
               <Icon as={ClipboardText} fontSize={20} />
-              <Text ml="4" fontWeight="medium">
+              <Text ml="4" fontWeight="bold">
                 Forms
               </Text>
             </Link>
             <Link display="flex" alignItems="center">
               <Icon as={Robot} fontSize={20} />
-              <Text ml="4" fontWeight="medium">
+              <Text ml="4" fontWeight="bold">
                 Automation
               </Text>
             </Link>
