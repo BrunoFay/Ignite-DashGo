@@ -1,5 +1,5 @@
-import { Flex, Icon, Input, Text } from '@chakra-ui/react'
-import { MagnifyingGlass } from 'phosphor-react'
+import { Avatar, Box, Flex, HStack, Icon, Input, Text } from '@chakra-ui/react'
+import { Bell, MagnifyingGlass, UserPlus } from 'phosphor-react'
 import React from 'react'
 
 export default function Header() {
@@ -46,9 +46,35 @@ export default function Header() {
           placeholder="Search on platform"
           _placeholder={{ color: 'gray.400' }}
         />
-        <Icon fontSize={23}>
-          <MagnifyingGlass />
-        </Icon>
+        <Icon as={MagnifyingGlass} fontSize={23} />
+      </Flex>
+
+      <Flex ml="auto">
+        <HStack
+          spacing={4}
+          mx="8"
+          pr="8"
+          py="1"
+          borderRightWidth={1}
+          color="gray.200"
+        >
+          <Icon fontSize={20} as={Bell} />
+          <Icon fontSize={20} as={UserPlus} />
+        </HStack>
+      </Flex>
+
+      <Flex align="center">
+        <Box mr="4" textAlign="right">
+          <Text>Bruno Fay</Text>
+          <Text color="gray.300" fontSize="small">
+            brunofay1@hotmail.com
+          </Text>
+        </Box>
+        <Avatar
+          size="md"
+          name="Bruno Fay"
+          src="https://github.com/brunofay.png"
+        />
       </Flex>
     </Flex>
   )
