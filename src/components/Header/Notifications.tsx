@@ -7,8 +7,8 @@ export default function Notifications() {
     <Flex ml="auto">
       <HStack
         spacing={4}
-        mx="8"
-        pr="8"
+        mx={['6', '8']}
+        pr={['6', '8']}
         py="1"
         borderRightWidth={1}
         color="gray.200"

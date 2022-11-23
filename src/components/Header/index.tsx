@@ -1,9 +1,13 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import Notifications from './Notifications'
 import Profile from './Profile'
 import SearchInput from './SearchInput'
 
 export default function Header() {
+  const isVisible = useBreakpointValue({
+    base: false,
+    lg: true,
+  })
   return (
     <Flex
       as="header"
@@ -26,11 +30,11 @@ export default function Header() {
         </Text>
       </Text>
 
-      <SearchInput />
+      {isVisible && <SearchInput />}
 
       <Notifications />
 
-      <Profile />
+      <Profile showProfileData={isVisible!} />
     </Flex>
   )
 }
