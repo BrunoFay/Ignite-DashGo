@@ -1,10 +1,19 @@
-import { Flex, Text, useBreakpointValue } from '@chakra-ui/react'
+import {
+  Flex,
+  Icon,
+  IconButton,
+  Text,
+  useBreakpointValue,
+} from '@chakra-ui/react'
+import { List } from 'phosphor-react'
+import { useSidebarDrawer } from '../../hooks/useSidebarDrawer'
 import Notifications from './Notifications'
 import Profile from './Profile'
 import SearchInput from './SearchInput'
 
 export default function Header() {
-  const isVisible = useBreakpointValue({
+  const { onOpen } = useSidebarDrawer()
+  const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   })
@@ -19,6 +28,17 @@ export default function Header() {
       px="6"
       align="center"
     >
+      {!isWideVersion && (
+        <IconButton
+          aria-label="Open navigation"
+          icon={<Icon as={List} />}
+          fontSize="24"
+          variant="unstyled"
+          onClick={onOpen}
+          mr="2"
+          mt="2"
+        />
+      )}
       <Text fontSize="3xl" fontWeight="bold" w={64} letterSpacing="tight">
         Dash
         <Text as="span" color="orange.500">
@@ -30,11 +50,11 @@ export default function Header() {
         </Text>
       </Text>
 
-      {isVisible && <SearchInput />}
+      {isWideVersion && <SearchInput />}
 
       <Notifications />
 
-      <Profile showProfileData={isVisible!} />
+      <Profile showProfileData={isWideVersion!} />
     </Flex>
   )
 }
