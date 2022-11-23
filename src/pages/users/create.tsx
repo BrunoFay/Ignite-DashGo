@@ -3,24 +3,71 @@ import {
   Button,
   Divider,
   Flex,
+  FormControl,
   Heading,
   HStack,
   SimpleGrid,
   Stack,
+  Text,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import InputDefault from '../../components/form/Input'
+import { InputDefault } from '../../components/form/Input'
 import Header from '../../components/Header'
 import Sidebar from '../../components/Sidebar'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
+const newUserFormSchema = yup.object().shape({
+  name: yup.string().min(4).required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([null, yup.ref('password')], "Passwords don't match"),
+})
+
+interface NewUser {
+  name: string
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 
 export default function Users() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    },
+    resolver: yupResolver(newUserFormSchema),
+  })
+
+  const handleCreateUser: SubmitHandler<NewUser> = (value, e) => {
+    e?.preventDefault()
+    console.log(value)
+  }
+
   return (
     <Box>
       <Header />
       <Flex maxW={1480} w="100%" my="6" mx="auto" px="6">
         <Sidebar />
 
-        <Box flex="1" borderRadius={8} bg="gray.800" p={['4', '8']}>
+        <Box
+          as="form"
+          onSubmit={handleSubmit(handleCreateUser)}
+          flex="1"
+          borderRadius={8}
+          bg="gray.800"
+          p={['4', '8']}
+        >
           <Heading size="lg" fontWeight="normal">
             Create new User
           </Heading>
@@ -29,27 +76,73 @@ export default function Users() {
 
           <Stack spacing={8}>
             <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
-              <InputDefault placeholder="" name="name" label="Full name" />
-              <InputDefault
-                placeholder="example@example.com"
-                name="email"
-                type="email"
-                label="Email"
-              />
+              <FormControl>
+                <InputDefault
+                  placeholder=""
+                  label="Full name"
+                  {...register('name')}
+                />
+                <Text
+                  color="red.500"
+                  position="absolute"
+                  bottom="-12px"
+                  fontSize="xs"
+                >
+                  {errors.name ? errors.name.message : ''}
+                </Text>
+              </FormControl>
+              <FormControl>
+                <InputDefault
+                  placeholder="example@example.com"
+                  type="email"
+                  label="Email"
+                  {...register('email')}
+                />
+                <Text
+                  color="red.500"
+                  position="absolute"
+                  bottom="-12px"
+                  fontSize="xs"
+                >
+                  {errors.email ? errors.email.message : ''}
+                </Text>
+              </FormControl>
             </SimpleGrid>
             <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
-              <InputDefault
-                placeholder="******"
-                name="password"
-                type="password"
-                label="Password"
-              />
-              <InputDefault
-                label="Confirm password"
-                placeholder="******"
-                type="password"
-                name="password_confirmation"
-              />
+              <FormControl>
+                <InputDefault
+                  placeholder="******"
+                  type="password"
+                  label="Password"
+                  {...register('password')}
+                />
+                <Text
+                  color="red.500"
+                  position="absolute"
+                  bottom="-12px"
+                  fontSize="xs"
+                >
+                  {errors.password ? errors.password.message : ''}
+                </Text>
+              </FormControl>
+              <FormControl>
+                <InputDefault
+                  label="Confirm password"
+                  placeholder="******"
+                  type="password"
+                  {...register('passwordConfirmation')}
+                />
+                <Text
+                  color="red.500"
+                  position="absolute"
+                  bottom="-12px"
+                  fontSize="xs"
+                >
+                  {errors.passwordConfirmation
+                    ? errors.passwordConfirmation.message
+                    : ''}
+                </Text>
+              </FormControl>
             </SimpleGrid>
           </Stack>
           <Flex mt="8" justify="flex-end">
@@ -59,7 +152,12 @@ export default function Users() {
                   Cancel
                 </Button>
               </Link>
-              <Button size={['sm', 'md']} colorScheme="green">
+              <Button
+                type="submit"
+                isLoading={isSubmitting}
+                size={['sm', 'md']}
+                colorScheme="green"
+              >
                 Create
               </Button>
             </HStack>

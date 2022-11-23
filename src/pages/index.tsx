@@ -27,7 +27,6 @@ export default function Home() {
     },
     resolver: yupResolver(signInFormSchema),
   })
-  console.log(errors?.email?.message)
 
   const handleLogin: SubmitHandler<{ email: string; password: string }> = (
     value,
