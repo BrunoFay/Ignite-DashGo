@@ -14,6 +14,7 @@ import {
   Tr,
   useBreakpointValue,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { Plus } from 'phosphor-react'
 import Header from '../../components/Header'
 import Pagination from '../../components/Pagination'
@@ -35,15 +36,17 @@ export default function Users() {
             <Heading size="lg" fontWeight="normal">
               Users
             </Heading>
-            <Button
-              as="a"
-              size="sm"
-              colorScheme="green"
-              fontSize={15}
-              leftIcon={<Icon as={Plus} />}
-            >
-              New User
-            </Button>
+            <Link href="/users/create">
+              <Button
+                as="a"
+                size={['xs', 'sm']}
+                colorScheme="green"
+                fontSize={15}
+                leftIcon={<Icon as={Plus} />}
+              >
+                New User
+              </Button>
+            </Link>
           </Flex>
 
           <Table>

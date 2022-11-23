@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Stack,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import InputDefault from '../../components/form/Input'
 import Header from '../../components/Header'
 import Sidebar from '../../components/Sidebar'
@@ -19,7 +20,7 @@ export default function Users() {
       <Flex maxW={1480} w="100%" my="6" mx="auto" px="6">
         <Sidebar />
 
-        <Box flex="1" borderRadius={8} bg="gray.800" p={8}>
+        <Box flex="1" borderRadius={8} bg="gray.800" p={['4', '8']}>
           <Heading size="lg" fontWeight="normal">
             Create new User
           </Heading>
@@ -27,7 +28,7 @@ export default function Users() {
           <Divider my="6" borderColor="gray.700" />
 
           <Stack spacing={8}>
-            <SimpleGrid minChildWidth="240px" spacing={8} w="100%">
+            <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
               <InputDefault placeholder="" name="name" label="Full name" />
               <InputDefault
                 placeholder="example@example.com"
@@ -36,7 +37,7 @@ export default function Users() {
                 label="Email"
               />
             </SimpleGrid>
-            <SimpleGrid minChildWidth="240px" spacing={8} w="100%">
+            <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
               <InputDefault
                 placeholder="******"
                 name="password"
@@ -53,8 +54,14 @@ export default function Users() {
           </Stack>
           <Flex mt="8" justify="flex-end">
             <HStack spacing="4">
-              <Button colorScheme="whiteAlpha">Cancel</Button>
-              <Button colorScheme="green">Create</Button>
+              <Link href="/users">
+                <Button size={['sm', 'md']} colorScheme="whiteAlpha">
+                  Cancel
+                </Button>
+              </Link>
+              <Button size={['sm', 'md']} colorScheme="green">
+                Create
+              </Button>
             </HStack>
           </Flex>
         </Box>

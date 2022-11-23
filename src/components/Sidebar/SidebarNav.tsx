@@ -8,13 +8,21 @@ export default function SidebarNav() {
   return (
     <Stack spacing={12} align="flex-start">
       <CategoryContainer name="GENERAL">
-        <CategoryLink icon={DiamondsFour}>Dashboard</CategoryLink>
-        <CategoryLink icon={UserList}>Users</CategoryLink>
+        <CategoryLink href="/dashboard" icon={DiamondsFour}>
+          Dashboard
+        </CategoryLink>
+        <CategoryLink href="/users" icon={UserList}>
+          Users
+        </CategoryLink>
       </CategoryContainer>
 
       <CategoryContainer name="AUTOMATION">
-        <CategoryLink icon={ClipboardText}>Forms</CategoryLink>
-        <CategoryLink icon={Robot}>Automation</CategoryLink>
+        <CategoryLink href="/forms" icon={ClipboardText}>
+          Forms
+        </CategoryLink>
+        <CategoryLink href="/automation" icon={Robot}>
+          Automation
+        </CategoryLink>
       </CategoryContainer>
     </Stack>
   )
