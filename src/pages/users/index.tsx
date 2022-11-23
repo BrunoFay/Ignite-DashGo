@@ -11,7 +11,8 @@ import {
   Text,
   Th,
   Thead,
-  Tr
+  Tr,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { Plus } from 'phosphor-react'
 import Header from '../../components/Header'
@@ -19,13 +20,17 @@ import Pagination from '../../components/Pagination'
 import Sidebar from '../../components/Sidebar'
 
 export default function Users() {
+  const isWideVersion = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
   return (
     <Box>
       <Header />
-      <Flex maxW={1480} w="100%" my="6" mx="auto" px="6">
+      <Flex maxW={1480} w="100%" my="6" mx="auto" px={['3', '3', '6']}>
         <Sidebar />
 
-        <Box flex="1" borderRadius={8} bg="gray.800" p={8}>
+        <Box flex="1" borderRadius={8} bg="gray.800" p={['4', '4', '8']}>
           <Flex mb={8} justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               Users
@@ -49,7 +54,7 @@ export default function Users() {
                 </Th>
                 <Th>User</Th>
                 <Th>Crated At</Th>
-                <Th></Th>
+                {!isWideVersion && <Th></Th>}
               </Tr>
             </Thead>
             <Tbody>
@@ -66,13 +71,15 @@ export default function Users() {
                   </Box>
                 </Td>
                 <Td>
-                  <Text> April 18, 1996</Text>
+                  <Text fontSize={['sm', 'md']}> April 18, 1996</Text>
                 </Td>
-                <Td>
-                  <Button as="a" size="sm" colorScheme="red" fontSize={16}>
-                    Edit
-                  </Button>
-                </Td>
+                {!isWideVersion && (
+                  <Td>
+                    <Button as="a" size="sm" colorScheme="red" fontSize={16}>
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
             </Tbody>
           </Table>

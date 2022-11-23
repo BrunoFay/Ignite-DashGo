@@ -106,13 +106,13 @@ export default function Dashboard() {
       <Flex maxW={1480} w="100%" my="6" mx="auto" px="6">
         <Sidebar />
         <SimpleGrid flex={1} gap="4" minChildWidth="320px">
-          <Box p="8" bg="gray.800" borderRadius="8" pb="4">
+          <Box p={['2', '8']} bg="gray.800" borderRadius="8" pb="4">
             <Text fontSize="lg" mb="4">
               New Subscribers of the week
             </Text>
             <Chart options={options} series={series} type="area" height={160} />
           </Box>
-          <Box p="8" bg="gray.800" borderRadius="8" pb="4">
+          <Box p={['2', '8']} bg="gray.800" borderRadius="8" pb="4">
             <Text fontSize="lg" mb="4">
               Most viewed categories of the week
             </Text>
@@ -120,7 +120,7 @@ export default function Dashboard() {
               options={options2}
               series={series}
               type="histogram"
-              height={160}
+              height={200}
             />
           </Box>
         </SimpleGrid>
