@@ -1,6 +1,6 @@
 import { Icon, Link as ChakraLink, LinkProps, Text } from '@chakra-ui/react'
-import Link from 'next/link'
 import { ElementType } from 'react'
+import ActiveLink from '../ActiveLink'
 
 interface CategoryLinksProps extends LinkProps {
   children: string
@@ -14,13 +14,13 @@ export default function CategoryLink({
   ...props
 }: CategoryLinksProps) {
   return (
-    <Link href={href}>
+    <ActiveLink href={href}>
       <ChakraLink display="flex" alignItems="center" {...props}>
         <Icon as={icon} fontSize={20} />
         <Text ml="4" fontWeight="bold">
           {children}
         </Text>
       </ChakraLink>
-    </Link>
+    </ActiveLink>
   )
 }
