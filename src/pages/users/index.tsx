@@ -11,7 +11,7 @@ import {
   Text,
   Th,
   Thead,
-  Tr,
+  Tr
 } from '@chakra-ui/react'
 import { Plus } from 'phosphor-react'
 import Header from '../../components/Header'
