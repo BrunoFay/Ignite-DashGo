@@ -15,35 +15,17 @@ import {
   Tr,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { Plus } from 'phosphor-react'
+import { useState } from 'react'
 import Header from '../../components/Header'
-import Pagination from '../../components/Pagination'
+import { Pagination } from '../../components/Pagination'
 import Sidebar from '../../components/Sidebar'
-import { Api } from '../../libs/Axios'
+import { useUsers } from '../../hooks/useUsers'
 
-interface UserApi {
-  id: string
-  name: string
-  email: string
-  createdAt: string
-}
 export default function Users() {
-  async function fetchUsersList(): Promise<UserApi[]> {
-    const { data } = await Api('http://localhost:3000/api/users')
-    const users = data.users.map((user: any) => ({
-      ...user,
-      createdAt: new Date(user.createdAt).toLocaleDateString('pt-br', {
-        dateStyle: 'long',
-      }),
-    }))
-    return users
-  }
-  const { data, isLoading, error, isRefetching } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchUsersList,
-  })
+  const [currentPage, setCurrentPage] = useState(1)
+  const { data, isLoading, error, isRefetching } = useUsers(currentPage)
 
   const isWideVersion = useBreakpointValue({
     base: true,
@@ -95,7 +77,7 @@ export default function Users() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.map((user: any) => (
+                  {data.users.map((user: any) => (
                     <Tr key={user.id}>
                       <Td>
                         <Checkbox colorScheme="orange" />
@@ -127,7 +109,11 @@ export default function Users() {
                   ))}
                 </Tbody>
               </Table>
-              <Pagination />
+              <Pagination
+                totalNumberRegisters={data.totalCount}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
             </>
           )}
         </Box>
