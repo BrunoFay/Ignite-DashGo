@@ -13,7 +13,7 @@ interface GetUsersResponse {
   totalCount: number
 }
 
-async function getUsers(currentPage: number): Promise<GetUsersResponse> {
+export async function getUsers(currentPage: number): Promise<GetUsersResponse> {
   const { data, headers } = await Api.get('/users', {
     params: {
       page: currentPage,
