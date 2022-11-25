@@ -42,5 +42,8 @@ async function getUsers(currentPage: number): Promise<GetUsersResponse> {
 }
 
 export function useUsers(currentPage: number) {
-  return useQuery({ queryKey: ['users'], queryFn: () => getUsers(currentPage) })
+  return useQuery({
+    queryKey: ['users', currentPage],
+    queryFn: () => getUsers(currentPage),
+  })
 }

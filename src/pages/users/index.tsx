@@ -14,6 +14,7 @@ import {
   Thead,
   Tr,
   useBreakpointValue,
+  Link as ChakraLink,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { Plus } from 'phosphor-react'
@@ -22,6 +23,8 @@ import Header from '../../components/Header'
 import { Pagination } from '../../components/Pagination'
 import Sidebar from '../../components/Sidebar'
 import { useUsers } from '../../hooks/useUsers'
+import { Api } from '../../libs/Axios'
+import { queryClient } from '../../libs/ReactQuery'
 
 export default function Users() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -31,6 +34,19 @@ export default function Users() {
     base: true,
     lg: false,
   })
+
+  async function handlePreFetching(userId: string) {
+    await queryClient.prefetchQuery(
+      ['users', userId],
+      async function () {
+        const response = await Api.get(`users/${userId}`)
+        return response.data
+      },
+      {
+        staleTime: 1000 * 60 * 10, // 10 min
+      },
+    )
+  }
 
   return (
     <>
@@ -84,7 +100,16 @@ export default function Users() {
                       </Td>
                       <Td>
                         <Box>
-                          <Text fontWeight="bold">{user.name}</Text>
+                          <Link href={`/users/${user.id}`} className="pink-500">
+                            {' '}
+                            <ChakraLink
+                              color="blue.300"
+                              onMouseEnter={() => handlePreFetching(user.id)}
+                              fontWeight="bold"
+                            >
+                              {user.name}
+                            </ChakraLink>
+                          </Link>
                           <Text color="gray.300" fontSize="small">
                             {user.email}
                           </Text>

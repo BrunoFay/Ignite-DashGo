@@ -26,7 +26,7 @@ export function makeServer() {
       }),
     },
     seeds(server) {
-      server.createList('user', 10)
+      server.createList('user', 100)
     },
     routes() {
       this.namespace = 'api'
@@ -46,7 +46,7 @@ export function makeServer() {
 
         return new Response(200, { 'x-total-count': String(total) }, { users })
       })
-
+      this.get('/users/:id')
       this.post('/users')
       this.put('/users')
 
