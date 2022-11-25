@@ -1,6 +1,6 @@
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
-import { cloneElement, ReactElement, useEffect } from 'react'
+import { cloneElement, ReactElement } from 'react'
 
 interface ActiveLinksProps extends LinkProps {
   children: ReactElement
