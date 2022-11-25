@@ -17,6 +17,9 @@ import Sidebar from '../../components/Sidebar'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
+import { useRouter } from 'next/router'
+import { useMutation } from '@tanstack/react-query'
+import { queryClient } from '../../libs/ReactQuery'
 
 const newUserFormSchema = yup.object().shape({
   name: yup.string().min(4).required(),
@@ -35,6 +38,19 @@ interface NewUser {
 }
 
 export default function Users() {
+  const router = useRouter()
+
+  const handleCreateUser: SubmitHandler<NewUser> = (value, e) => {
+    e?.preventDefault()
+    mutateAsync(value)
+  }
+  const { mutateAsync, isLoading } = useMutation(handleCreateUser, {
+    onSuccess() {
+      queryClient.invalidateQueries(['users'])
+      router.push('/users')
+    },
+  })
+
   const {
     register,
     handleSubmit,
@@ -48,11 +64,6 @@ export default function Users() {
     },
     resolver: yupResolver(newUserFormSchema),
   })
-
-  const handleCreateUser: SubmitHandler<NewUser> = (value, e) => {
-    e?.preventDefault()
-    console.log(value)
-  }
 
   return (
     <Box>
@@ -154,9 +165,10 @@ export default function Users() {
               </Link>
               <Button
                 type="submit"
-                isLoading={isSubmitting}
+                isLoading={isSubmitting || isLoading}
                 size={['sm', 'md']}
                 colorScheme="green"
+                disabled={isLoading}
               >
                 Create
               </Button>
