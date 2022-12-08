@@ -14,13 +14,13 @@ interface GetUsersResponse {
 }
 
 export async function getUsers(currentPage: number): Promise<GetUsersResponse> {
-  const { data, HeaderComponents } = await Api.get('/users', {
+  const { data, headers } = await Api.get('/users', {
     params: {
       page: currentPage,
     },
   })
 
-  const totalCount = Number(HeaderComponents['x-total-count'])
+  const totalCount = Number(headers['x-total-count'])
 
   const users = data.users.map((user: User) => {
     return {

@@ -4,7 +4,7 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeaderComponent,
+  DrawerHeader,
   DrawerOverlay,
   useBreakpointValue,
 } from '@chakra-ui/react'
@@ -24,9 +24,9 @@ export default function Sidebar() {
         <DrawerOverlay>
           <DrawerContent bg="gray.800" p="4">
             <DrawerCloseButton mt="6" />
-            <DrawerHeaderComponent>
+            <DrawerHeader>
               <Logo />
-            </DrawerHeaderComponent>
+            </DrawerHeader>
             <DrawerBody mt="6">
               <SidebarNav />
             </DrawerBody>
