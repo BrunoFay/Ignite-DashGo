@@ -13,8 +13,8 @@ export default function Notifications() {
         borderRightWidth={1}
         color="gray.200"
       >
-        <Icon fontSize={20} as={Bell} />
-        <Icon fontSize={20} as={UserPlus} />
+        <Icon data-testid="icon" fontSize={20} as={Bell} />
+        <Icon data-testid="icon" fontSize={20} as={UserPlus} />
       </HStack>
     </Flex>
   )

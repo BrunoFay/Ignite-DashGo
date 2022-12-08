@@ -5,6 +5,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Link as ChakraLink,
   Spinner,
   Table,
   Tbody,
@@ -14,12 +15,11 @@ import {
   Thead,
   Tr,
   useBreakpointValue,
-  Link as ChakraLink,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { Plus } from 'phosphor-react'
 import { useState } from 'react'
-import Header from '../../components/Header'
+import { HeaderComponent } from '../../components/Header'
 import { Pagination } from '../../components/Pagination'
 import Sidebar from '../../components/Sidebar'
 import { useUsers } from '../../hooks/useUsers'
@@ -50,7 +50,7 @@ export default function Users() {
 
   return (
     <>
-      <Header />
+      <HeaderComponent />
       <Flex maxW={1480} w="100%" my="6" mx="auto" px={['3', '3', '6']}>
         <Sidebar />
 

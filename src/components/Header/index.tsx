@@ -6,7 +6,7 @@ import Notifications from './Notifications'
 import Profile from './Profile'
 import SearchInput from './SearchInput'
 
-export default function Header() {
+export function HeaderComponent() {
   const { onOpen } = useSidebarDrawer()
   const isWideVersion = useBreakpointValue({
     base: false,

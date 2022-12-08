@@ -10,15 +10,15 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import Link from 'next/link'
-import { InputDefault } from '../../components/form/Input'
-import Header from '../../components/Header'
-import Sidebar from '../../components/Sidebar'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { useRouter } from 'next/router'
-import { useMutation } from '@tanstack/react-query'
+import { InputDefault } from '../../components/form/Input'
+import { HeaderComponent } from '../../components/Header'
+import Sidebar from '../../components/Sidebar'
 import { queryClient } from '../../libs/ReactQuery'
 
 const newUserFormSchema = yup.object().shape({
@@ -67,7 +67,7 @@ export default function Users() {
 
   return (
     <Box>
-      <Header />
+      <HeaderComponent />
       <Flex maxW={1480} w="100%" my="6" mx="auto" px="6">
         <Sidebar />
 
